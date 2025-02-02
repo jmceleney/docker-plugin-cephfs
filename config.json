@@ -1,7 +1,7 @@
 {
 	"description": "Volume plugin for mounting CephFS filesystems",
 	"documentation": "https://docs.docker.com/engine/extend/plugins/",
-	"entrypoint": ["docker-plugin-cephfs"],
+	"entrypoint": ["/usr/local/bin/docker-plugin-cephfs"],
 	"propagatedMount": "/var/lib/docker-volumes",
 	"network": {
 		"type": "host"
@@ -27,10 +27,22 @@
 			"Value": "ceph"
 		},
 		{
+			"Name": "REMOTE_PREFIX",
+			"Description": "Default remote path (prefix) to store volumes",
+			"Settable": ["value"],
+			"Value": ""
+		},
+		{
 			"Name": "SERVERS",
 			"Description": "Comma-delimited list of ceph monitors to connect to",
 			"Settable": ["value"],
 			"Value": "localhost"
+		},
+		{
+			"Name": "GLOBAL_SCOPE",
+			"Description": "Driver has global scope",
+			"Settable": ["value"],
+			"Value": "1"
 		},
 		{
 			"Name": "DEBUG_MODE",
@@ -53,6 +65,14 @@
 			"destination": "/lib/modules",
 			"type": "bind",
 			"options": ["rbind"]
+		},
+		{
+			"name": "Host Hostname",
+			"description": "Mount containing the host's /etc/hostname",
+			"source": "/etc/hostname",
+			"destination": "/etc/hostname-external",
+			"type": "bind",
+			"options": ["rbind", "ro"]
 		}
 	]
 }
