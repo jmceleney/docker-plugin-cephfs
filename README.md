@@ -62,7 +62,7 @@ Then, copy over this keyring file to your docker hosts.
 
 ## Installation (root of cephfs filesystem)
 ```shell script
-docker plugin install --alias cephfs jmceleney/docker-plugin-cephfs \
+docker plugin install --alias cephfs jmceleney/docker-plugin-cephfs:master \
 CLUSTER_NAME=ceph \
 CLIENT_NAME=admin \
 SERVERS=ceph1,ceph2,ceph3
@@ -70,7 +70,7 @@ SERVERS=ceph1,ceph2,ceph3
 
 ## Installation (subvolume of cephfs filesystem)
 ```shell script
-docker plugin install --alias cephfs jmceleney/docker-plugin-cephfs \
+docker plugin install --alias cephfs jmceleney/docker-plugin-cephfs:master \
 CLUSTER_NAME=ceph \
 CLIENT_NAME=admin \
 SERVERS=ceph1,ceph2,ceph3 \
@@ -112,3 +112,5 @@ volumes:
 
 ## Driver options
 Unlike the driver that this is based on, driver_opts are ignored.
+If you need to access two different clusters or two different subvolumes, just install the
+plugin twice under two different aliases.
